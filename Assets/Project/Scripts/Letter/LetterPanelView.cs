@@ -3,14 +3,16 @@ using UnityEngine.UI;
 
 public class LetterPanelView : MonoBehaviour
 {
-    public Image letterImage;
+    [SerializeField] private Image letterTrace;
+    [SerializeField] private Image letterTop;
 
     public void ShowLetter(LetterTraceData data)
     {
-        if (data == null || letterImage == null)
+        if (data == null || letterTrace == null)
             return;
 
-        letterImage.sprite = data.letterSprite;
+        letterTrace.sprite = data.letterSprite;
+        letterTop.sprite = data.letterSprite;
 
     }
 }
