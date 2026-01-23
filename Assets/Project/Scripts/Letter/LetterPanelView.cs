@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,13 +7,13 @@ public class LetterPanelView : MonoBehaviour
     [SerializeField] private Image letterTrace;
     [SerializeField] private Image letterTop;
 
-    public void ShowLetter(LetterTraceData data)
+    void OnEnable()
     {
-        if (data == null || letterTrace == null)
-            return;
-
-        letterTrace.sprite = data.letterSprite;
-        letterTop.sprite = data.letterSprite;
+        letterTrace.sprite = SelectedLetterHolder.current.strokeData.letterSprite;
+        letterTop.sprite = SelectedLetterHolder.current.strokeData.letterSprite;
 
     }
+
+
+
 }

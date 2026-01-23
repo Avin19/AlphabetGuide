@@ -1,73 +1,70 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [Header("Panel")]
-    [SerializeField] private Transform mainMenuPanel;
-    [SerializeField] private Transform gamePanel;
-    [Header("Button")]
+    [Header("Panels")]
+    [SerializeField] private GameObject mainMenuPanel;
+    [SerializeField] private GameObject levelPagePanel;
+    [SerializeField] private GameObject letterPanel;
+
+    [Header("Buttons")]
     [SerializeField] private Button letterBtn;
-    [SerializeField] private Button wordBtn;
-    [SerializeField] private Button gameBtn;
 
+    public static UIManager Instance;
 
-    public void PanelController(PanelType _panel)
+    void Awake()
     {
-        switch (_panel)
-        {
-            case PanelType.None:
-                mainMenuPanel.gameObject.SetActive(false);
-                gamePanel.gameObject.SetActive(false);
-                break;
-            case PanelType.MainMenu:
-                mainMenuPanel.gameObject.SetActive(true);
-                gamePanel.gameObject.SetActive(false);
-                break;
-            case PanelType.GamePanel:
-                mainMenuPanel.gameObject.SetActive(false);
-                gamePanel.gameObject.SetActive(true);
-                break;
-
-
-        }
+        Instance = this;
     }
+
     void Start()
     {
-        PanelController(PanelType.MainMenu);
-
+        ShowPanel(PanelType.MainMenu);
     }
+
     void OnEnable()
     {
-        letterBtn.onClick.AddListener(() => LetterPanel());
-        wordBtn.onClick.AddListener(WordPanel());
-        gameBtn.onClick.AddListener(GamePanel());
+        letterBtn.onClick.AddListener(OpenLevelPage);
     }
 
-    private UnityAction GamePanel()
+    void OnDisable()
     {
-        throw new NotImplementedException();
+        letterBtn.onClick.RemoveAllListeners();
     }
 
-    private UnityAction WordPanel()
+    public void ShowPanel(PanelType panel)
     {
-        throw new NotImplementedException();
+        mainMenuPanel.SetActive(false);
+        levelPagePanel.SetActive(false);
+        letterPanel.SetActive(false);
+
+        switch (panel)
+        {
+            case PanelType.MainMenu:
+                mainMenuPanel.SetActive(true);
+                break;
+
+            case PanelType.LevelPage:
+                levelPagePanel.SetActive(true);
+                break;
+
+            case PanelType.LetterPanel:
+                letterPanel.SetActive(true);
+                break;
+        }
     }
 
-    private UnityAction LetterPanel()
+    void OpenLevelPage()
     {
-        throw new NotImplementedException();
+        ShowPanel(PanelType.LevelPage);
     }
 }
-
 public enum PanelType
 {
     None,
     MainMenu,
-    GamePanel
+    LevelPage,
+    LetterPanel
 }
+
