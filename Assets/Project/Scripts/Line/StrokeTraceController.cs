@@ -178,13 +178,15 @@ public class StrokeTraceValidator : MonoBehaviour
         Debug.Log($"⭐ Stars: {stars}");
 
         SaveResult(stars);
+        ClearAllStrokes();
+        AdMobManager.Instance.TryShowInterstitial();
         UIManager.Instance.ShowPanel(PanelType.LevelPage);
     }
     int CoverageToStars(float coverage)
     {
-        if (coverage >= 0.90f) return 3;
-        if (coverage >= 0.70f) return 2;
-        if (coverage >= 0.40f) return 1;
+        if (coverage >= 0.70f) return 3;
+        if (coverage >= 0.30f) return 2;
+        if (coverage >= 0.20f) return 1;
         return 0;
     }
 
@@ -225,6 +227,24 @@ public class StrokeTraceValidator : MonoBehaviour
         if (percent >= 0.7f) return 2;
         if (percent >= 0.4f) return 1;
         return 0;
+    }
+    public void ClearAllStrokes()
+    {
+        // Remove all drawn lines
+        foreach (Transform child in lineParent)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Clear stored stroke data
+        userStrokes.Clear();
+
+        // Reset state
+        isDrawing = false;
+        currentLine = null;
+        lastDrawPos = Vector2.zero;
+
+        Debug.Log("🧹 All strokes cleared");
     }
 
     void SaveResult(int stars)
