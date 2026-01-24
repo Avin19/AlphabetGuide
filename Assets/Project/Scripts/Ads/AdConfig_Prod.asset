@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95765d3b495cb7e41b6f7decdac931c2, type: 3}
   m_Name: AdConfig_Prod
   m_EditorClassIdentifier: 
-  bannerId: ca-app-pub-1779486678797596/1979417804
-  interstitialId: ca-app-pub-1779486678797596/3390085285
-  rewardedId: ca-app-pub-1779486678797596/5142150652
+  bannerId: ca-app-pub-1779486678797596/3646442715
+  interstitialId: ca-app-pub-1779486678797596/4996334787
+  rewardedId: ca-app-pub-1779486678797596/1755271380
   enableGdprConsent: 0
   requestConsentOnStartup: 0
   loadBannerOnStart: 1

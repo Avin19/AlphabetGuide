@@ -16,6 +16,8 @@ public class StrokeTraceValidator : MonoBehaviour
     [Header("Stroke Filter")]
     public float minStrokeLength = 50f; // px
     public int minStrokePoints = 5;
+    [Header("Submit Panel")]
+    public SubmitPanelController submitPanel;
 
     private Camera cam;
     private LineRenderer currentLine;
@@ -179,8 +181,13 @@ public class StrokeTraceValidator : MonoBehaviour
 
         SaveResult(stars);
         ClearAllStrokes();
+        submitPanel.Show(
+      stars,
+      avgCoverage,
+      this
+  );
         AdMobManager.Instance.TryShowInterstitial();
-        UIManager.Instance.ShowPanel(PanelType.LevelPage);
+        //UIManager.Instance.ShowPanel(PanelType.LevelPage);
     }
     int CoverageToStars(float coverage)
     {
