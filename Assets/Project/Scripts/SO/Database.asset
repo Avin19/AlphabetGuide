@@ -14,10 +14,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   letters:
   - letterId: 1
-    starsEarned: 3
+    starsEarned: 0
     unlocked: 1
     strokeData: {fileID: 11400000, guid: d25cd2edfe7cc8b44b72f26d49b8a409, type: 2}
   - letterId: 2
     starsEarned: 0
-    unlocked: 1
+    unlocked: 0
     strokeData: {fileID: 11400000, guid: 0374d699e92534e4f9c55aa9a4a46345, type: 2}
+  - letterId: 3
+    starsEarned: 0
+    unlocked: 0
+    strokeData: {fileID: 11400000, guid: 698b44df342839e4d89c13b73df41a02, type: 2}
+  - letterId: 4
+    starsEarned: 0
+    unlocked: 0
+    strokeData: {fileID: 11400000, guid: e66edf3ce0cb25543be7c0b2a684397b, type: 2}
+  - letterId: 5
+    starsEarned: 0
+    unlocked: 0
+    strokeData: {fileID: 11400000, guid: d5e8a52f2ae886f4c9693e3aa566f8ce, type: 2}
+  - letterId: 6
+    starsEarned: 0
+    unlocked: 0
+    strokeData: {fileID: 11400000, guid: 4339d050085272344a433d6c6f22305d, type: 2}
+  - letterId: 7
+    starsEarned: 0
+    unlocked: 0
+    strokeData: {fileID: 11400000, guid: 3dc63ae981469e443894ff0e713c82fd, type: 2}
+  - letterId: 8
+    starsEarned: 0
+    unlocked: 0
+    strokeData: {fileID: 11400000, guid: 705a2afb875fb4c4188a122b04ff897e, type: 2}
