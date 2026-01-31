@@ -5,28 +5,28 @@ using UnityEngine.UI;
 public class SubmitPanelController : MonoBehaviour
 {
     [Header("Canvas")]
-    public CanvasGroup canvasGroup;
+    [SerializeField] private CanvasGroup canvasGroup;
 
     [Header("Title Image")]
-    public Image titleImage;
+    [SerializeField] private Image titleImage;
 
     [Header("Title Sprites")]
-    public Sprite greatJobSprite;
-    public Sprite goodTrySprite;
-    public Sprite awesomeSprite;
-    public Sprite wellDoneSprite;
-    public Sprite letsPracticeSprite;
+    [SerializeField] private Sprite greatJobSprite;
+    [SerializeField] private Sprite goodTrySprite;
+    [SerializeField] private Sprite awesomeSprite;
+    [SerializeField] private Sprite wellDoneSprite;
+    [SerializeField] private Sprite letsPracticeSprite;
 
     [Header("Stars")]
-    public Image[] stars;
-    public Sprite filledStar;
-    public Sprite emptyStar;
+    [SerializeField] private Image[] stars;
+    [SerializeField] private Sprite filledStar;
+    [SerializeField] private Sprite emptyStar;
 
     [Header("Buttons")]
-    public Button retryButton;
-    public Button nextButton;
-    public Button rewardButton;
-    public TextMeshProUGUI coverageText;
+    [SerializeField] private Button retryButton;
+    [SerializeField] private Button nextButton;
+    [SerializeField] private Button rewardButton;
+    [SerializeField] private TextMeshProUGUI coverageText;
 
     private StrokeTraceValidator traceValidator;
 
@@ -64,7 +64,7 @@ public class SubmitPanelController : MonoBehaviour
         rewardButton.onClick.AddListener(() => OnRewardClicked());
 
     }
-    void Osable()
+    void OnDisable()
     {
         retryButton.onClick.RemoveAllListeners();
         nextButton.onClick.RemoveAllListeners();
@@ -99,9 +99,6 @@ public class SubmitPanelController : MonoBehaviour
         canvasGroup.interactable = false;
     }
 
-    // =========================
-    // BUTTON CALLBACKS
-    // =========================
 
     public void OnRetryClicked()
     {

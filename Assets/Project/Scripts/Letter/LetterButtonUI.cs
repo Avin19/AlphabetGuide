@@ -3,10 +3,10 @@ using UnityEngine.UI;
 
 public class LetterButtonUI : MonoBehaviour
 {
-    public Image letterSprite;
-    public Image[] stars;        // size = 3
-    public Sprite starSprite;
-    public Button button;
+    [SerializeField] private Image letterSprite;
+    [SerializeField] private Image[] stars;        // size = 3
+    [SerializeField] private Sprite starSprite;
+    [SerializeField] private Button button;
 
     private LetterProgress data;
 
