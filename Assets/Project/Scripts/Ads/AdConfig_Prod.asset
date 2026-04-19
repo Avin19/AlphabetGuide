@@ -15,13 +15,13 @@ MonoBehaviour:
   bannerId: ca-app-pub-1779486678797596/3646442715
   interstitialId: ca-app-pub-1779486678797596/4996334787
   rewardedId: ca-app-pub-1779486678797596/1755271380
-  enableGdprConsent: 0
-  requestConsentOnStartup: 0
+  enableGdprConsent: 1
+  requestConsentOnStartup: 1
   loadBannerOnStart: 1
   autoShowBanner: 1
   bannerRetryInitialDelay: 30
   bannerRetryMaxDelay: 300
-  interstitialEveryNEvents: 2
+  interstitialEveryNEvents: 5
   interstitialCooldownSeconds: 30
   preloadRewarded: 1
   useTestAds: 0

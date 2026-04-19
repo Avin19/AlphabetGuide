@@ -1,91 +1,40 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using HutongGames.PlayMaker;
 
 public class LetterLevelPageController : MonoBehaviour
 {
     [SerializeField] private LetterProgressDatabase database;
-    [SerializeField] private LetterButtonUI buttonPrefab;
-    [SerializeField] private Transform gridParent;
-    [SerializeField] private Button rewardUnlockedLetter;
-    [SerializeField] private Button backButton;
+    [SerializeField] private PlayMakerFSM levelFSM;
 
     void OnEnable()
     {
         LetterProgressSaveSystem.Load(database);
         BuildUI();
-        rewardUnlockedLetter.onClick.AddListener(() => RewardUnlockedLetter());
-        backButton.onClick.AddListener(() => BackButton());
 
     }
 
-    private void BackButton()
+    public void BuildUI()
     {
-        UIManager.Instance.ShowPanel(PanelType.MainMenu);
-    }
+        levelFSM.FsmVariables.GetFsmInt("numberOfLetter").Value = database.letters.Count;
+        //Debug.Log(database.letters.Count);
 
-    void OnDisable()
-    {
-        rewardUnlockedLetter.onClick.RemoveAllListeners();
-        backButton.onClick.RemoveAllListeners();
-    }
-
-    private void RewardUnlockedLetter()
-    {
-        AdMobManager.Instance.ShowRewarded(() =>
-    {
-        var letter = SelectedLetterHolder.current;
-        if (letter == null) return;
-        UnlockNextLetter();
-
-        LetterProgressSaveSystem.Save(
-            LetterProgressDatabaseHolder.Instance
-        );
-
-    });
 
     }
-
-    void BuildUI()
+    public void LoadLetterData(int index)
     {
-        foreach (Transform child in gridParent)
-            Destroy(child.gameObject);
-
-        foreach (var letter in database.letters)
-        {
-            var btn = Instantiate(buttonPrefab, gridParent);
-            btn.Setup(letter, OnLetterSelected);
-        }
+        levelFSM.FsmVariables.GetFsmObject("letters").Value = database.letters[index].strokeData;
     }
 
-    void OnLetterSelected(LetterProgress progress)
+    public void LetterData(int index)
     {
-        SelectedLetterHolder.current = progress;
-
-        UIManager.Instance.ShowPanel(PanelType.LetterPanel);
+        levelFSM.FsmVariables.GetFsmGameObject("createObject").Value.GetComponent<Image>().sprite = database.letters[index].strokeData.letterSprite;
+        // levelFSM.FsmVariables.GetFsmGameObject("createObject").Value.GetComponent<StarEarned>().ActivteStar(database.letters[index].starsEarned);
+        levelFSM.FsmVariables.GetFsmInt("currectLetterStar").Value = database.letters[index].starsEarned;
     }
-    void UnlockNextLetter()
-    {
-        var db = LetterProgressDatabaseHolder.Instance;
-        var current = SelectedLetterHolder.current;
-
-        if (db == null || current == null)
-            return;
-
-        int index = db.letters.IndexOf(current);
-
-        if (index < 0 || index + 1 >= db.letters.Count)
-            return;
-
-        var next = db.letters[index + 1];
-
-        if (!next.unlocked)
-        {
-            next.unlocked = true;
-            LetterProgressSaveSystem.Save(db);
 
 
-        }
-    }
+
 
 }

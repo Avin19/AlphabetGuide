@@ -81,6 +81,13 @@ public class AdMobManager : MonoBehaviour
     }
     private void InitializeAdMob()
     {
+        RequestConfiguration configs = new RequestConfiguration
+        {
+            TagForChildDirectedTreatment = TagForChildDirectedTreatment.True,
+            MaxAdContentRating = MaxAdContentRating.G
+        };
+
+        MobileAds.SetRequestConfiguration(configs);
         MobileAds.Initialize(_ =>
         {
             Debug.Log("AdMob initialized");
@@ -279,6 +286,10 @@ public class AdMobManager : MonoBehaviour
 
     public void ShowRewarded(Action onRewardGranted)
     {
+        interstitialEventCounter++;
+
+        if (interstitialEventCounter < config.interstitialEveryNEvents)
+            return;
         if (!isRewardedReady || rewardedAd == null)
         {
             Debug.Log("Rewarded not ready");
